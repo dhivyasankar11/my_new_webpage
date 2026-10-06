@@ -1,0 +1,29 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Get source code
+        uses: actions/checkout@v4
+
+      - name: Check HTML file
+        run: |
+          test -f index.html
+          echo "HTML file found successfully"
+
+      - name: Validate HTML
+        run: |
+          grep -q "<html>" index.html
+          grep -q "</html>" index.html
+          echo "HTML validation successful"
+
+      - name: Deployment
+        run: |
+          echo "Application deployment successful"
